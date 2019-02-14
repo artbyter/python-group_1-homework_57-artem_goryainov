@@ -5,7 +5,7 @@ const AlertList=(props)=>{
     let counter=0;
     if(props.alerts) {
         return <div>{props.alerts.map((item) => {
-            return <Alert key={item.id} id={item.id} text={item.text} class={item.class} close={props.close}/>
+            return <Alert key={item.id} id={item.id}  class={item.class} close={props.close}>{item.text}</Alert>
         })}</div>
     }
     else
@@ -13,7 +13,7 @@ const AlertList=(props)=>{
 }
 
 const Alert=(props)=>{
-    return(<div className={'alert '+props.class} >{props.text}<div className='float-right' onClick={()=>{props.close(props.id)}}>X</div></div>)
+    return(<div className={'alert '+props.class} >{props.children}{props.close!=undefined?<div className='float-right' onClick={()=>{props.close(props.id)}}>X</div>:null}</div>)
 }
 
 export default AlertList

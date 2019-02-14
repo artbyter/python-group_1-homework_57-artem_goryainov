@@ -30,7 +30,7 @@ const data = [
 увы собака не спаслась`
     }];
 
-const ALERT_LENGTH=3
+const ALERT_LENGTH = 3
 
 class App extends Component {
 
@@ -41,25 +41,25 @@ class App extends Component {
             show: false,
             currentId: 0,
             alerts: [],
-            currentAlertId:0,
+            currentAlertId: 0,
         }
 
     }
 
     addAlert = (alert) => {
         let alerts = [...this.state.alerts];
-        if (this.state.alerts.length==ALERT_LENGTH){
+        if (this.state.alerts.length == ALERT_LENGTH) {
 
             alerts.shift()
         }
-        this.setState({alerts: [...alerts, alert],currentAlertId:this.state.currentAlertId+1})
+        this.setState({alerts: [...alerts, alert], currentAlertId: this.state.currentAlertId + 1})
     }
 
     removeAlert = (id = 0) => {
         let alerts = [...this.state.alerts];
         if (id === 0) {
 
-            alerts.splice(0,1)
+            alerts.splice(0, 1)
             console.log(alerts)
         } else {
             let alertId = this.state.alerts.findIndex(alert => {
@@ -74,7 +74,8 @@ class App extends Component {
     }
 
     showModal = () => {
-        this.setState({show: true});
+        let alerts = [];
+        this.setState({alerts: alerts, show: true});
     }
 
     hideModal = () => {
@@ -82,28 +83,26 @@ class App extends Component {
     }
 
     next = () => {
-        if(this.state.currentId===data.length-1){
+        if (this.state.currentId === data.length - 1) {
             this.addAlert({id: this.state.currentAlertId, class: 'alert-warning', text: 'Пирашки закончились!!'})
-        }
-        else
-        this.setState({currentId: this.state.currentId + 1});
+        } else
+            this.setState({currentId: this.state.currentId + 1});
     }
 
     prev = () => {
-        if(this.state.currentId===0){
+        if (this.state.currentId === 0) {
             this.addAlert({id: this.state.currentAlertId, class: 'alert-warning', text: 'Пирашков еще нет!'})
-        }
-        else
-        this.setState({currentId: this.state.currentId - 1});
+        } else
+            this.setState({currentId: this.state.currentId - 1});
     }
 
 
     closed = this.hideModal;
 
-    continued = this.showModal;
+
 
     render() {
-         console.log(this.state.alerts)
+        console.log(this.state.alerts)
         const buttons = [
             {type: 'primary', label: '<<Prev', clicked: this.prev},
             {type: 'primary', label: 'Next>>', clicked: this.next},
@@ -147,7 +146,7 @@ class App extends Component {
                     <p>{data[this.state.currentId].text}</p>
                 </Modal>
 
-                <button onClick={this.showModal}>Смотрим!</button>
+                <button className='btn btn-primary border border-dark mt-4' onClick={this.showModal}>Смотрим!</button>
             </div>
         );
     }
