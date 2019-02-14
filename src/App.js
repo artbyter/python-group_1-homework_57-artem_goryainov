@@ -53,6 +53,7 @@ class App extends Component {
             alerts.shift()
         }
         this.setState({alerts: [...alerts, alert], currentAlertId: this.state.currentAlertId + 1})
+        setInterval(()=>this.removeAlert(),5000)
     }
 
     removeAlert = (id = 0) => {
@@ -60,14 +61,14 @@ class App extends Component {
         if (id === 0) {
 
             alerts.splice(0, 1)
-            console.log(alerts)
+
         } else {
             let alertId = this.state.alerts.findIndex(alert => {
 
                 return alert.id === id;
             });
             alerts.splice(alertId, 1)
-            console.log(alerts)
+           
         }
 
         this.setState({alerts: alerts})
